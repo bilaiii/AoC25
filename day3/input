@@ -1,7 +1,4 @@
-// use std::fs;
-
-fn main() {
-    let input = "5966546654588755548354591946657465889859765969657756889447669666979883895847755487857956955568577855
+5966546654588755548354591946657465889859765969657756889447669666979883895847755487857956955568577855
 4542746645767855433451537445453466457263428353646434434876784556524857444555654342425558296642647865
 5422251221224555623173322266326732412226343722532361271223275221532113734725256725254212236227222221
 2324224426223243523532255245222222132222322212312412227525212622115222222422233212314232235522221282
@@ -200,51 +197,4 @@ fn main() {
 7722122222234222472214222222212422223812223742415321422228423223331323222242346242622222284222221121
 4531123234334233233248633323343142333332444234332323234434414148453332244343442223152333442433345823
 2221316224345532222214424621334432622232324326226223222222212342223244232513433522145226533232122623
-9454527354735656537472876857246747554763445832354347645346455852255465346827664554778667358636366668";
-    let mut sum: u32 = 0;
-    let banks = input.split("\n");
-    for bank in banks {
-        println!("{}", bank);
-        let bank_iter = bank.chars();
-        let mut bank_of_int: Vec<u32> = Vec::new();
-        let mut highest_value: u32 = 0;
-        let mut highest_index: u32 = 0;
-        let mut prev_highest_value: u32 = 0;
-        let mut repeated: bool = false;
-        let mut first_digit: u32;
-        let mut last_digit: u32 = 0;
-        for (index, battery_char) in bank_iter.enumerate() {
-            let battery_int = battery_char.to_digit(10).expect("err");
-            bank_of_int.push(battery_int);
-            if battery_int >= highest_value {
-                repeated = true;
-                if battery_int > highest_value {
-                    repeated = false;
-                    prev_highest_value = highest_value;
-                    highest_value = battery_int;
-                    highest_index = index as u32;
-                }
-            }
-        }
-        if repeated {
-            first_digit = highest_value;
-            last_digit = highest_value;
-        } else if highest_index == 99 {
-            last_digit = highest_value;
-            first_digit = prev_highest_value
-        } else {
-            first_digit = highest_value;
-            let sliced_bank = &bank_of_int[(highest_index + 1) as usize..100];
-            for battery in sliced_bank {
-                if battery > &last_digit {
-                    last_digit = battery.to_owned()
-                }
-            }
-        }
-        println!("{bank_of_int:?}");
-        println!("{highest_value} in index {highest_index} and is repeated: {repeated}");
-        println!("{first_digit}{last_digit}");
-        sum = sum + first_digit * 10 + last_digit
-    }
-    println!("{sum}");
-}
+9454527354735656537472876857246747554763445832354347645346455852255465346827664554778667358636366668
